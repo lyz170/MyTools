@@ -1,0 +1,23 @@
+## App property info
+app:
+  property:
+    env: dev-node2
+
+## Server info
+server:
+  port: 10000
+
+## Eureka info (Peer Awareness)
+## See: https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.2.2.RELEASE/reference/html/#spring-cloud-eureka-server-peer-awareness
+eureka:
+  instance:
+    hostname: 192.168.1.22
+    # See: https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.2.2.RELEASE/reference/html/#spring-cloud-eureka-server-prefer-ip-address
+    prefer-ip-address: true
+  client:
+    # regard it as eureka client and set 'true'
+    registerWithEureka: true
+    fetchRegistry: true
+    # Register itself to another Eureka Server
+    serviceUrl:
+      defaultZone: http://${eureka.username}:${eureka.password}@192.168.1.21:10000/server-eureka/eureka/

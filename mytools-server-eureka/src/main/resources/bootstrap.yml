@@ -1,0 +1,10 @@
+# bootstrap.yml loads earlier than application.yml, so some high priority configurations need to configure here.
+# application name, it's also eureka instance id.
+spring:
+  application:
+    name: server-eureka
+
+## Use JCE for password encoding in configuration file. For more details, please see:
+## See: https://cloud.spring.io/spring-cloud-static/spring-cloud-config/2.2.2.RELEASE/reference/html/#_encryption_and_decryption
+encrypt:
+  key: my-secret-key

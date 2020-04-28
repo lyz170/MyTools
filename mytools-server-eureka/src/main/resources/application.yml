@@ -1,0 +1,40 @@
+## App property info
+app:
+  property:
+    env: default
+    log-path: /applications/mytools-server-eureka/${app.property.env}/logs
+
+
+## Server info
+server:
+  port: 10000
+  servlet:
+    context-path: /server-eureka
+
+## Eureka info (Standalone Mode)
+## Note: Every client service register will take cost 30s(3 heartbeats * 10s) to show in Eureka Server. And then you can use the service.
+## See: https://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.2.2.RELEASE/reference/html/#spring-cloud-eureka-server-standalone-mode.
+## See: org.springframework.cloud.netflix.eureka.server.EurekaServerConfigBean.
+## See: https://github.com/Netflix/eureka/wiki.
+eureka:
+  username: eureka-user
+  password: '{cipher}72cd0bdd18c6928b025e9e5dfa94cce539b555c4b3364590c689df3532fa69bc'
+  instance:
+    hostname: localhost
+  client:
+    # Don't register it as a Eureka client, because it's a Eureka Server
+    registerWithEureka: false
+    # Don't fetch registry
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.username}:${eureka.password}@${eureka.instance.hostname}:${server.port}/server-eureka/eureka/
+  # Set this only for this sample service without which starting the instance will by default wait for the default of 5 mins
+#  server:
+#    waitTimeInMsWhenSyncEmpty: 0
+
+## Actuator Info
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
